@@ -35,14 +35,6 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - name: Cache playwright binaries
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
       - name: Setup pnpm cache 
         uses: actions/cache@v3
         with:
@@ -52,9 +44,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: |
-          pnpm dlx create-playwright --with-deps
-          pnpm install
+        run: pnpm install
 
       - name: "Type Check"
         run: pnpm run typecheck
