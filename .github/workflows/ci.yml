@@ -11,7 +11,7 @@ on:
 jobs:
   ci:
     name: "CI"
-    runs-on: macos-12
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -35,6 +35,14 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
+      - name: Setup playwright cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - name: Setup pnpm cache 
         uses: actions/cache@v3
         with:
@@ -44,7 +52,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm dlx create-playwright --with-deps
+          pnpm install
 
       - name: "Type Check"
         run: pnpm run typecheck
@@ -56,4 +66,4 @@ jobs:
         run: pnpm run build
 
       - name: "Test project"
-        run: pnpm run test
+        run: HEADFUL=true xvfb-run --auto-servernum pnpm run test
