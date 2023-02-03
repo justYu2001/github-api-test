@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pnpm dlx create-playwright
+          pnpm dlx create-playwright --with-deps
           pnpm install
 
       - name: "Type Check"
