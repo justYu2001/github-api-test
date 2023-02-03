@@ -44,8 +44,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
-    
+        run: |
+          pnpm dlx create-playwright
+          pnpm install
 
       - name: "Type Check"
         run: pnpm run typecheck
