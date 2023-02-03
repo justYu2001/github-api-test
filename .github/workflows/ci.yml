@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  cache-and-install:
-    name: "Cache and Install dependencies"
+  ci:
+    name: "CI"
     runs-on: ubuntu-latest
 
     steps:
@@ -46,34 +46,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
     
-  type-check:
-    name: "Type Check"
-    needs: cache-and-install
-    runs-on: ubuntu-latest
 
-    steps:
-      - run: pnpm run typecheck
+      - name: "Type Check"
+        run: pnpm run typecheck
 
-  lint:
-    name: "Lint"
-    needs: cache-and-install
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: pnpm run lint
+      - name: "Lint"
+        run: pnpm run lint
     
-  build:
-    name: "Build project"
-    needs: [type-check, lint]
-    runs-on: ubuntu-latest
+      - name: "Build project"
+        run: pnpm run build
 
-    steps:
-      - run: pnpm run build
-
-  test:
-    name: "Test project"
-    needs: build
-    runs-on: ubuntu-latest
-  
-    steps:
-      - run: pnpm run test
+      - name: "Test project"
+        run: pnpm run test
