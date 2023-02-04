@@ -15,9 +15,21 @@ describe("Counter Component", () => {
     test("increase", async ({ user }) => {
         render(<Counter />);
 
-        const button = screen.getByRole("button");
+        const button = screen.getByText("+");
         await user.click(button);
 
         expect(screen.getByRole("heading").textContent).toBe("1");
+    });
+
+    test("minus", async ({ user }) => {
+        render(<Counter />);
+
+        const addButton = screen.getByText("+");
+        await user.click(addButton);
+
+        const minusButton = screen.getByText("-");
+        await user.click(minusButton);
+
+        expect(screen.getByRole("heading").textContent).toBe("0");
     });
 });
