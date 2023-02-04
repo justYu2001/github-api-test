@@ -10,7 +10,7 @@ on:
 
 jobs:
   ci:
-    name: "CI"
+    name: CI
     runs-on: ubuntu-latest
 
     steps:
@@ -56,14 +56,14 @@ jobs:
           pnpm dlx create-playwright --with-deps
           pnpm install
 
-      - name: "Type Check"
+      - name: Type check
         run: pnpm run typecheck
 
-      - name: "Lint"
+      - name: Lint
         run: pnpm run lint
     
       - name: "Build project"
         run: pnpm run build
 
-      - name: "Test project"
+      - name: Test project
         run: HEADFUL=true xvfb-run --auto-servernum pnpm run test

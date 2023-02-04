@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// This is a Counter Component
 const Counter = () => {
     const [count, setCount] = useState(0);
 
