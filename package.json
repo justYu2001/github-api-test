@@ -1,7 +1,7 @@
 {
   "name": "browser-extension-development-learning",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "ci": "pnpm run typecheck && pnpm run lint && pnpm run build && pnpm run test",
