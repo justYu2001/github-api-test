@@ -66,4 +66,6 @@ jobs:
         run: pnpm run build
 
       - name: Test project
+        env:
+          test: ${{ secrets.test }}
         run: HEADFUL=true xvfb-run --auto-servernum pnpm run test
