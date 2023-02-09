@@ -69,6 +69,6 @@ jobs:
         run: pnpm dev
       - name: Test project
         env:
-          studentID: ${{ secrets.studentID }}
+          studentID: ${{ secrets.STUDENT_ID }}
           password: ${{ secrets.password }}
         run: HEADFUL=true xvfb-run --auto-servernum pnpm test
