@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "ci": "pnpm typecheck && pnpm lint && pnpm build && start-server-and-test dev 5173 test",
+    "ci": "pnpm typecheck && pnpm lint && pnpm build && start-server-and-test \"pnpm dev --host 127.0.0.1\" http://127.0.0.1:5173 test",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint --cache .",

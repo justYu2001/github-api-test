@@ -11,7 +11,7 @@ describe.concurrent("Sign in without a captcha", () => {
         await page.locator("#password").fill(env.password);
 
         await page.getByRole("button").click();
-        await page.waitForLoadState("networkidle");
+        await page.waitForLoadState("domcontentloaded");
 
         const portalAppUrlRegex = new RegExp("^https://app\.ntut\.edu\.tw/myPortal\.do.*$");
 
