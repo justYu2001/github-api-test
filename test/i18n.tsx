@@ -10,7 +10,7 @@ type SupportedLanguage = typeof SupportedLanguages[number];
 i18n.use(Backend).use(initReactI18next).init({
     fallbackLng: "en",
     backend: {
-        loadPath: "http:localhost:5173/locales/{{lng}}/{{ns}}.json",
+        loadPath: "http://127.0.0.1:5173/locales/{{lng}}/{{ns}}.json",
     },
     react: {
         useSuspense: false,
