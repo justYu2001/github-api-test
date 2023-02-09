@@ -57,16 +57,18 @@ jobs:
           pnpm install
 
       - name: Type check
-        run: pnpm run typecheck
+        run: pnpm typecheck
 
       - name: Lint
-        run: pnpm run lint
+        run: pnpm lint
     
-      - name: "Build project"
-        run: pnpm run build
+      - name: Build project
+        run: pnpm build
 
+      - name: Start server
+        run: pnpm dev
       - name: Test project
         env:
           studentID: ${{ secrets.studentID }}
           password: ${{ secrets.password }}
-        run: HEADFUL=true xvfb-run --auto-servernum start-server-and-test dev 5173 test
+        run: HEADFUL=true xvfb-run --auto-servernum pnpm test
