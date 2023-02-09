@@ -1,13 +1,24 @@
-import { test as base } from "vitest-fixture";
 import { resolve } from "path";
-import { chromium } from "playwright";
-import type { BrowserContext, Page } from "playwright";
+
 import userEvent from "@testing-library/user-event";
+import dotenv from "dotenv";
+import type { BrowserContext, Page } from "playwright";
+import { chromium } from "playwright";
+import { test as base } from "vitest-fixture";
+import { z } from "zod";
+
+const envSchema = z.object({
+    studentID: z.string().min(1),
+    password: z.string().min(1),
+});
+
+type Env = z.infer<typeof envSchema>;
 
 interface TestFixtures {
     browser: BrowserContext;
     page: Page;
     user: ReturnType<typeof userEvent.setup>;
+    env: Env;
 }
 
 export const test = base.extend<TestFixtures>({
@@ -33,5 +44,21 @@ export const test = base.extend<TestFixtures>({
     user: async ({}, use) => {
         const user = userEvent.setup();
         await use(user);
+    },
+    env: async ({}, use) => {
+        dotenv.config();
+
+        const env = {
+            studentID: process.env.studentID,
+            password: process.env.password,
+        };
+        
+        const parsedEnv = envSchema.safeParse(env);
+
+        if (!parsedEnv.success) {
+            throw new Error("Invalid environment variables");
+        }
+
+        await use(parsedEnv.data);
     },
 });
