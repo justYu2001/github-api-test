@@ -65,10 +65,8 @@ jobs:
       - name: Build project
         run: pnpm build
 
-      - name: Start server
-        run: pnpm dev
       - name: Test project
         env:
           studentID: ${{ secrets.STUDENT_ID }}
           password: ${{ secrets.password }}
-        run: HEADFUL=true xvfb-run --auto-servernum pnpm test
+        run: HEADFUL=true xvfb-run --auto-servernum start-server-and-test dev 5173 test
