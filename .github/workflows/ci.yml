@@ -68,13 +68,15 @@ jobs:
       - name: Build project
         run: pnpm build:${{ matrix.browser }}
 
-      # - name: Serve translation files
-      #   uses: Eun/http-server-action@v1
+      - name: Serve translation files
+        uses: Eun/http-server-action@v1
+        with:
+          allowed-methods: ["GET", "HEAD", "OPTIONS"]
 
-      # - name: Check translation files are available
-      #   run: |
-      #     curl -vvvv http://127.0.0.1:8080/locales/zh/translation.json
-      #     curl -vvvv http://127.0.0.1:8080/locales/en/translation.json
+      - name: Check translation files are available
+        run: |
+          curl -vvvv http://127.0.0.1:8080/locales/zh/translation.json
+          curl -vvvv http://127.0.0.1:8080/locales/en/translation.json
 
       - name: Test project
         if: ${{ matrix.browser }} == "chrome"
