@@ -71,7 +71,8 @@ jobs:
       - name: Serve translation files
         uses: Eun/http-server-action@v1
         with:
-          allowed-methods: ["GET", "HEAD", "OPTIONS"]
+          allowed-methods: |
+            ["GET", "HEAD", "OPTIONS"]
 
       - name: Check translation files are available
         run: |
