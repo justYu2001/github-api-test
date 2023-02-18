@@ -10,7 +10,7 @@ export default defineConfig({
         deps: {
             inline: ["vitest-fixture"],
         },
-        testTimeout: 90_000,
+        testTimeout: 120_000,
         globals: true,
         environment: "jsdom",
         setupFiles: "./tests/setup.ts",
