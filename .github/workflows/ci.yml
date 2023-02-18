@@ -72,5 +72,5 @@ jobs:
         if: ${{ matrix.browser }} == "chrome"
         env:
           STUDENT_ID: ${{ secrets.STUDENT_ID }}
-          Password: ${{ secrets.Password }}
+          PASSWORD: ${{ secrets.Password }}
         run: HEADFUL=true xvfb-run --auto-servernum npx server-test 'http-server -s' 8080 test
