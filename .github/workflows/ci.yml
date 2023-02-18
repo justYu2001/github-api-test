@@ -13,7 +13,7 @@ jobs:
     name: CI
     strategy:
       matrix:
-        browser: ["chrome", "firefox"]
+        browser: [chrome, firefox]
     runs-on: ubuntu-latest
 
     steps:
@@ -69,8 +69,8 @@ jobs:
         run: pnpm build:${{ matrix.browser }}
 
       - name: Test project
-        if: matrix.browser == "chrome"
+        if: matrix.browser == chrome
         env:
           STUDENT_ID: ${{ secrets.STUDENT_ID }}
           PASSWORD: ${{ secrets.Password }}
-        run: HEADFUL=true xvfb-run --auto-servernum npx server-test 'http-server --cors' 8080 test
+        run: HEADFUL=true xvfb-run --auto-servernum npx server-test 'http-server -s --cors' 8080 test
