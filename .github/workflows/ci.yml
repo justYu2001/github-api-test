@@ -68,10 +68,17 @@ jobs:
       - name: Build project
         run: pnpm build:${{ matrix.browser }}
 
+      - name: Serve translation files
+        run: npx http-server -s
+
+      - name: Check translation files are available
+        run: |
+          curl -vvvv http://127.0.0.1:8080/locales/zh/translation.json
+          curl -vvvv http://127.0.0.1:8080/locales/en/translation.json
+
       - name: Test project
         if: ${{ matrix.browser }} == "chrome"
         env:
           STUDENT_ID: ${{ secrets.STUDENT_ID }}
           PASSWORD: ${{ secrets.Password }}
-        uses: Eun/http-server-action@v1
         run: HEADFUL=true xvfb-run --auto-servernum pnpm test
