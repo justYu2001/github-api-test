@@ -28,7 +28,7 @@ describe.concurrent("end-to-end testing for redirecting to the app portal", () =
         await page.locator("input[type='text']").first().fill("北科入口");
         await page.keyboard.down("Enter");
         await page.locator("a[href='https://nportal.ntut.edu.tw/']").click();
-        await page.waitForLoadState("domcontentloaded");
+        await page.waitForURL("https://app.ntut.edu.tw/index.do");
         expect(page.url()).toBe("https://app.ntut.edu.tw/index.do");
     });
 });

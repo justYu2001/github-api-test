@@ -11,7 +11,7 @@ describe.concurrent("Sign in without a captcha", () => {
         await page.locator("#password").fill(env.password);
 
         await page.getByRole("button",  { name: "登入" }).click();
-        await page.waitForLoadState("domcontentloaded");
+        await page.waitForURL("https://app.ntut.edu.tw/myPortal.do*")
 
         const portalAppUrlRegex = new RegExp("^https://app\.ntut\.edu\.tw/myPortal\.do.*$");
 
@@ -25,7 +25,7 @@ describe.concurrent("Sign in without a captcha", () => {
         await page.locator("#password").fill(env.password);
 
         await page.getByRole("button",  { name: "登入" }).click();
-        await page.waitForLoadState("domcontentloaded");
+        await page.waitForURL("https://app.ntut.edu.tw/login.do");
 
         expect(page.url()).toBe("https://app.ntut.edu.tw/login.do");
         expect(await page.locator("h3").first().innerText()).toBe("登入失敗！");
@@ -42,7 +42,7 @@ describe.concurrent("Sign in without a captcha", () => {
         await page.locator("#password").fill("a");
 
         await page.getByRole("button",  { name: "登入" }).click();
-        await page.waitForLoadState("domcontentloaded");
+        await page.waitForURL("https://app.ntut.edu.tw/login.do");
 
         expect(page.url()).toBe("https://app.ntut.edu.tw/login.do");
         expect(await page.locator("h3").first().innerText()).toBe("登入失敗！");
