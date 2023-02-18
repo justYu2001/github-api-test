@@ -1,10 +1,11 @@
+import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vitest/config";
-import { resolve } from "path";
 
 export default defineConfig({
+    plugins: [react()],
     test: {
         alias: {
-            "@": resolve(__dirname, "src"),
+            "@": __dirname,
         },
         deps: {
             inline: ["vitest-fixture"],
@@ -12,6 +13,6 @@ export default defineConfig({
         testTimeout: 60_000,
         globals: true,
         environment: "jsdom",
-        setupFiles: "./test/setup.ts",
+        setupFiles: "./tests/setup.ts",
     },
 });
