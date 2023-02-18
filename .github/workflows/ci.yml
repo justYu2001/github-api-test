@@ -84,4 +84,4 @@ jobs:
         env:
           STUDENT_ID: ${{ secrets.STUDENT_ID }}
           PASSWORD: ${{ secrets.Password }}
-        run: HEADFUL=true xvfb-run --auto-servernum npx server-test 'http-server' http://127.0.0.1:8080 test
+        run: HEADFUL=true xvfb-run --auto-servernum pnpm test
