@@ -5,13 +5,22 @@ import { it } from "./fixture";
 
 describe.concurrent("Sign in without a captcha", () => {
     it("should redirect to the index page of the portal app after the user signs in successfully", async ({ env, page }) => {
+        console.info("before goto");
         await page.goto("https://app.ntut.edu.tw/index.do");
+        console.info("after goto");
 
+        console.info("before fill");
         await page.locator("#student-id").fill(env.studentID);
         await page.locator("#password").fill(env.password);
+        console.info("after fill");
 
+        console.info("before click");
         await page.getByRole("button",  { name: "登入" }).click();
-        await page.waitForURL("https://app.ntut.edu.tw/myPortal.do*")
+        console.info("after click");
+
+        console.info("before redirect");
+        await page.waitForURL("https://app.ntut.edu.tw/myPortal.do*");
+        console.info("after redirect");
 
         const portalAppUrlRegex = new RegExp("^https://app\.ntut\.edu\.tw/myPortal\.do.*$");
 
