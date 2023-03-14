@@ -57,7 +57,6 @@ export const it = test.extend<TestFixtures>({
     },
     popupPage: async ({ browser, extensionId }, use) => {
         const page = await browser.newPage();
-        page.setDefaultTimeout(60_000);
         await page.goto(`chrome-extension://${extensionId}/popup.html`);
         await use(page);
     },

@@ -9,7 +9,9 @@ describe("e2e-testing for popup link", () => {
         await popupPage.getByText("北科入口網站").click();
 
         const newPage = await pagePromise;
-        await newPage.waitForLoadState();
+        await newPage.waitForLoadState("domcontentloaded", {
+            timeout: 60_000,
+        });
 
         expect(newPage.url()).toBe("https://app.ntut.edu.tw/index.do");
     });
@@ -20,7 +22,9 @@ describe("e2e-testing for popup link", () => {
         await popupPage.getByText("專案連結").click();
 
         const newPage = await pagePromise;
-        await newPage.waitForLoadState();
+        await newPage.waitForLoadState("domcontentloaded", {
+            timeout: 60_000,
+        });
 
         expect(newPage.url()).toBe("https://github.com/justYu2001/NTUT-Enhancer");
     });
