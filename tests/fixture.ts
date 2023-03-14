@@ -17,6 +17,8 @@ type Env = z.infer<typeof envSchema>;
 interface TestFixtures {
     browser: BrowserContext;
     page: Page;
+    extensionId: string;
+    popupPage: Page;
     user: ReturnType<typeof userEvent.setup>;
     env: Env;
 }
@@ -31,6 +33,7 @@ export const it = test.extend<TestFixtures>({
                 `--disable-extensions-except=${pathToExtension}`,
                 `--load-extension=${pathToExtension}`,
             ],
+            locale: "zh",
         });
 
         await use(browser, async () => {
@@ -40,6 +43,21 @@ export const it = test.extend<TestFixtures>({
     page: async ({ browser }, use) => {
         const page = await browser.newPage();
         page.setDefaultTimeout(60_000);
+        await use(page);
+    },
+    extensionId: async ({ browser }, use) => {
+        let [background] = browser.serviceWorkers();
+
+        if (!background) {
+            background = await browser.waitForEvent("serviceworker");
+        }
+
+        const extensionId = background.url().split("/")[2];
+        await use(extensionId);
+    },
+    popupPage: async ({ browser, extensionId }, use) => {
+        const page = await browser.newPage();
+        await page.goto(`chrome-extension://${extensionId}/popup.html`);
         await use(page);
     },
     user: async ({}, use) => {
