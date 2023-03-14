@@ -13,7 +13,7 @@ jobs:
     name: CI
     strategy:
       matrix:
-        browser: ["chrome", "firefox"]
+        browser: ['chrome', 'firefox']
     runs-on: ubuntu-latest
 
     steps:
@@ -69,7 +69,7 @@ jobs:
         run: pnpm build:${{ matrix.browser }}
 
       - name: Test project
-        if: ${{ matrix.browser }} == "chrome"
+        if: matrix.browser == 'chrome'
         env:
           STUDENT_ID: ${{ secrets.STUDENT_ID }}
           PASSWORD: ${{ secrets.password }}
