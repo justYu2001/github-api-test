@@ -4,8 +4,18 @@ This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with
 
 First, run the development server:
 
-```bash
-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
+> `ADMIN_ACCESS_TOKEN` 的內容請到[此連結](https://hackmd.io/@Yu2001/BJyhrl4bn)複製
+
+```
+# GitHub OAuth
+CLIENT_ID="6ae6ef7260480074bfba"
+CLIENT_SECRET="1c5b1be6c92715ac98f3029547d914cbb725fd5b"
+
+# iron-session
+SECRET_COOKIE_PASSWORD="CP67JKQZfvTv6WvemYxmDXXP3P8nL0qz"
+
+# Admin Token
+ADMIN_ACCESS_TOKEN=""
 ```
 
 Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
